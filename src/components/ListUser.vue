@@ -37,7 +37,7 @@
       @current-change="setPage"
       layout="prev, pager, next"
     ></el-pagination>
-    <el-dialog title="Edit user" :visible.sync="dialogVisible" width="30%">
+    <el-dialog :title="titleModal" :visible.sync="dialogVisible" width="40%">
       <el-form :model="form">
         <el-form-item label="Name">
           <el-input v-model="form.name" placeholder="please enter name" />
@@ -113,6 +113,7 @@ export default {
       return index + 1;
     },
     handleEdit(row, type) {
+      this.titleModal="Edit user"
       this.type = type;
       this.dialogVisible = true;
       this.form = {
@@ -126,7 +127,6 @@ export default {
       this.dialogVisible = false;
       if (this.type == "add") {
         let dataAdd = this.form;
-
         this.addUser(dataAdd);
       } else {
         this.updateUser(this.form);
@@ -140,8 +140,15 @@ export default {
     },
 
     handleAdd(type) {
+      this.titleModal="Add user"
       this.dialogVisible = true;
       this.type = type;
+       this.form = {
+        id: "",
+        name: "",
+        position: "",
+        unit: "",
+      };
     },
   },
 };
