@@ -1,28 +1,19 @@
 <template>
   <el-row>
-    <!-- <router-view ></router-view> -->
-    <!-- <div>{{ dataUser }}</div> -->
     <div class="row-search">
       <div class="row-searchBar">
-        <el-input
-          v-model="search"
-          placeholder="Search by name"
-          @change="handleSearch"
-          @keydown="handleSearch"
-        >
+        <el-input v-model="search" placeholder="Search" @change="handleSearch">
         </el-input>
         <i class="el-icon-search"></i>
       </div>
       <el-button type="success" @click="handleAdd('add')">Add user</el-button>
     </div>
-    <!-- <el-icon-search/> -->
     <el-table :data="pagedTableData" v-loading="loading">
-      <el-table-column label="#" type="index" :index="indexMethod">
+      <el-table-column label="#" type="index" >
       </el-table-column>
       <el-table-column label="User" prop="name">
         <template slot-scope="sc">
           <div class="row-user">
-            <!-- <el-avatar :size="50" :src="JSON.stringtify(sc.row.avatar)"></el-avatar> -->
             {{ sc.row.name }}
           </div>
         </template>
@@ -58,7 +49,6 @@
           <el-input v-model="form.unit" placeholder="unit" />
         </el-form-item>
       </el-form>
-      <!-- <span>This is a message</span> -->
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">Cancel</el-button>
         <el-button type="primary" @click="handleSave">Save</el-button>
@@ -73,6 +63,7 @@ export default {
   props: {},
   data() {
     return {
+      titleModal: "",
       tableData: [],
       page: 1,
       pageSize: 10,
@@ -107,13 +98,10 @@ export default {
       "deleteUser",
       "updateUser",
       "addUser",
-      "searchUserByName",
+      "searchUser",
     ]),
-    // renderList(){
-    //    return JSON.parse(this.listUser.listUser)
-    // }
     handleSearch() {
-      this.searchUserByName(this.search);
+      this.searchUser(this.search);
     },
     setPage(val) {
       this.page = val;
@@ -122,13 +110,11 @@ export default {
       this.deleteUser(row.id);
     },
     indexMethod(index) {
-      return (index + 1);
+      return index + 1;
     },
     handleEdit(row, type) {
-      console.log(row);
       this.type = type;
       this.dialogVisible = true;
-
       this.form = {
         id: row.id,
         name: row.name,

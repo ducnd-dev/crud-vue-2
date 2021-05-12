@@ -1,22 +1,17 @@
 import Vue from 'vue';
-import Router from 'vue-route';
+import Router from 'vue-router';
 Vue.use(Router)
-
-import UserDetail from '@/components/UserDetail'
 import ListUser from '@/components/ListUser'
-export const routes = [
+const routes = [
     {
         path: '/',
-        component: ListUser
+        component: ListUser,
+        name: 'list'
     },
-    {
-        path: '/user/:id',
-        component: UserDetail
-    }
 ]
-
-// export default new Router({
-//     mode: "history",
-//     scrollBehavior: () => ({ y: 0 }),
-//     routes: routes
-// })
+const router = new Router({
+    mode: 'history',
+    // base: __dirname,
+    routes: routes
+})
+export default router

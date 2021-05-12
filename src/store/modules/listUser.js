@@ -1,7 +1,4 @@
 import axios from 'axios';
-// import { Promise } from 'core-js';
-
-
 const listUser = {
     state: {
         loading: false,
@@ -26,13 +23,12 @@ const listUser = {
                 }
                 return item
             })
-            console.log(update);
             state.listUser = update
         },
         ADD_USER: (state, data) => {
             state.listUser.unshift(data)
         },
-        SEARCH_USER_BY_NAME: (state, data) => {
+        SEARCH_USER: (state, data) => {
             state.listUser = data
 
         }
@@ -83,26 +79,14 @@ const listUser = {
                 console.log(error);
             }
         },
-        searchUserByName({ commit, state }, data) {
-            console.log(data);
-            // const oldList = state.listUser
-            const objects = state.listUser
-            const results = []
-            for (var i = 0; i < objects.length; i++) {
-                for (let key in objects[i]) {
-                    if (objects[i][key].indexOf(data) != -1) {
-                        results.push(objects[i]);
-                    }
-                }
+        searchUser({ commit }, data) {
+            const local = JSON.parse(localStorage.getItem("listAllUser"))
+            const objects = local
+            let results = objects.filter(obj => Object.keys(obj).some(key => obj[key].includes(data)));
+            if (data == "") {
+                results = local
             }
-            
-            commit('SEARCH_USER_BY_NAME', results)
-
-            // if (data) {
-            //     state.listUser = data
-            // }else{
-            //     state.listUser = localStorage
-            // }
+            commit('SEARCH_USER', results)
         }
 
     }

@@ -1,21 +1,21 @@
 <template>
   <div id="app">
-    
-    <el-container>
+    <!-- <el-container>
       <el-header></el-header>
-      <el-main>
-        <ListUser />
-      </el-main>
-    </el-container>
-        <router-view></router-view>
-    
+      <el-main> -->
+        <!-- <ListUser /> -->
+    <router-view />
+
+      <!-- </el-main>
+    </el-container> -->
+
   </div>
 </template>
 <script>
-import ListUser from "./components/ListUser.vue";
+// import ListUser from "./components/ListUser.vue";
 export default {
   name: "App",
-  components: { ListUser },
+  components: {  },
 };
 </script>
 
@@ -23,5 +23,6 @@ export default {
 #app {
   max-width: 1280px;
   margin: auto;
+  padding-top: 100px;
 }
 </style>
