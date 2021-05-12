@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 Vue.use(Router)
-import ListUser from '@/components/ListUser'
+import ListUser from '@/views/ListUser'
 const routes = [
     {
         path: '/',

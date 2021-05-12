@@ -3,19 +3,18 @@
     <!-- <el-container>
       <el-header></el-header>
       <el-main> -->
-        <!-- <ListUser /> -->
+    <!-- <ListUser /> -->
     <router-view />
 
-      <!-- </el-main>
+    <!-- </el-main>
     </el-container> -->
-
   </div>
 </template>
 <script>
 // import ListUser from "./components/ListUser.vue";
 export default {
   name: "App",
-  components: {  },
+  components: {},
 };
 </script>
 

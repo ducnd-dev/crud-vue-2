@@ -30,7 +30,6 @@ const listUser = {
         },
         SEARCH_USER: (state, data) => {
             state.listUser = data
-
         }
     },
 
@@ -43,8 +42,10 @@ const listUser = {
                 localStorage.setItem('listAllUser', list)
                 await commit('GET_ALL_USER', data.data)
                 state.loading = false
+                return Promise.resolve(true)
             } catch (error) {
                 console.log(error);
+                return Promise.reject(false)
             }
         },
         async deleteUser({ commit, state }, id) {
@@ -52,11 +53,13 @@ const listUser = {
                 if (id) {
                     state.loading = true
                     await axios.delete(`https://609b30fa2b549f00176e3169.mockapi.io/user/${id}`)
-                    commit('DELETE_USER', id)
+                    await commit('DELETE_USER', id)
                     state.loading = false
                 }
+                return Promise.resolve(true)
             } catch (error) {
                 console.log(error);
+                return Promise.reject(false)
             }
         },
         async updateUser({ commit, state }, data) {
@@ -65,8 +68,10 @@ const listUser = {
                 const user = await axios.put(`https://609b30fa2b549f00176e3169.mockapi.io/user/${data.id}`, data)
                 await commit('UPDATE_USER', user.data)
                 state.loading = false
+                return Promise.resolve(true)
             } catch (error) {
                 console.log(error);
+                return Promise.reject(false)
             }
         },
         async addUser({ commit }, data) {
@@ -75,8 +80,10 @@ const listUser = {
                     const user = await axios.post(`https://609b30fa2b549f00176e3169.mockapi.io/user`, data)
                     await commit('ADD_USER', user.data)
                 }
+                return Promise.resolve(true)
             } catch (error) {
                 console.log(error);
+                return Promise.reject(false)
             }
         },
         searchUser({ commit }, data) {

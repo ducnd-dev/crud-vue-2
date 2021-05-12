@@ -9,7 +9,7 @@
       <el-button type="success" @click="handleAdd('add')">Add user</el-button>
     </div>
     <el-table :data="pagedTableData" v-loading="loading">
-      <el-table-column label="#" type="index" >
+      <el-table-column label="#" type="index" :index="indexMethod">
       </el-table-column>
       <el-table-column label="User" prop="name">
         <template slot-scope="sc">
@@ -110,10 +110,10 @@ export default {
       this.deleteUser(row.id);
     },
     indexMethod(index) {
-      return index + 1;
+      return this.pageSize * (this.page - 1) + index + 1;
     },
     handleEdit(row, type) {
-      this.titleModal="Edit user"
+      this.titleModal = "Edit user";
       this.type = type;
       this.dialogVisible = true;
       this.form = {
@@ -140,10 +140,10 @@ export default {
     },
 
     handleAdd(type) {
-      this.titleModal="Add user"
+      this.titleModal = "Add user";
       this.dialogVisible = true;
       this.type = type;
-       this.form = {
+      this.form = {
         id: "",
         name: "",
         position: "",
